@@ -15,18 +15,23 @@ Examples
 
 const uniqueString = (str) => {
     let tracker = {}
-    return str.toLowerCase().split('').map((ltr, ind, arr) => {
+    let result = ''
+    let strArr = str.toLowerCase().split('')
+
+    strArr.forEach(ltr => {
         if (ltr in tracker) {
-            return ')'
-        }
-        else if (arr.lastIndexOf(ltr) === arr.indexOf(ltr)) {
-            return '('
+            tracker[ltr]++
         }
         else {
-            tracker[ltr] = true
-            return ')'
+            tracker[ltr] = 1
         }
-    }).join('')
+    })
+
+    for (const ltr of strArr) {
+        tracker[ltr] === 1 ? result += '(' : result += ')'
+    }
+    
+    return result
 }
 
 console.log(uniqueString('din'), '(((')
